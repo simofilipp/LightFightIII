@@ -4,15 +4,14 @@ using UnityEngine;
 
 public class SpadaScript : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    private void OnCollisionEnter(Collision collision)
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        if (collision.gameObject.tag == "DiscoNemico")
+        {
+            var discoColpito = collision.gameObject;
+            discoColpito.GetComponent<CapsuleCollider>().enabled = true;
+            Destroy(discoColpito);
+            //fare in modo che il disco si disfi prima di distruggerlo
+        }
     }
 }

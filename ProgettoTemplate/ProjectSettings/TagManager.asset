@@ -13,6 +13,7 @@ TagManager:
   - HUD
   - Console
   - DiscoNemico
+  - RestartFuocoNemico
   layers:
   - Default
   - TransparentFX

@@ -12,7 +12,9 @@ public class SpostaDischiScript : MonoBehaviour
         {
             var disco = other.gameObject;
             disco.transform.LookAt(player.transform);
-            disco.GetComponent<Rigidbody>().AddForce(disco.transform.forward * potenzaSpostamento, ForceMode.Impulse);
+            disco.GetComponent<Rigidbody>().AddForce(disco.transform.forward * potenzaSpostamento, ForceMode.VelocityChange);
+
+            //disco.GetComponent<Rigidbody>().MovePosition(player.transform.position);
         }
     }
 }

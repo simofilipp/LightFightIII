@@ -31,7 +31,7 @@ public class EnemyScript : MonoBehaviour
             var puntatoreCasuale = cannoni[Random.Range(0, cannoni.Count)].transform.GetChild(0);
             //istanzio un disco laser e lo sparo
             var colpo = Instantiate(discoLaser, puntatoreCasuale.position, puntatoreCasuale.rotation);
-            colpo.GetComponent<Rigidbody>().AddForce(puntatoreCasuale.forward*forzaEsplosione, ForceMode.Impulse);
+            colpo.GetComponent<Rigidbody>().AddForce(puntatoreCasuale.forward*forzaEsplosione, ForceMode.VelocityChange);
             Destroy(colpo, 3f);
             yield return new WaitForSeconds(0.5f);
         }

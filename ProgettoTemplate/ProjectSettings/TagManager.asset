@@ -12,6 +12,7 @@ TagManager:
   - BuddyBot
   - HUD
   - Console
+  - DiscoNemico
   layers:
   - Default
   - TransparentFX

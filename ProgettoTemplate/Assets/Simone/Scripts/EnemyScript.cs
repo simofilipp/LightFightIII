@@ -37,6 +37,7 @@ public class EnemyScript : MonoBehaviour
             {
                 //spara il disco grabbabile e si cambia fase di gioco
                 colpo = Instantiate(discoGrab, puntatoreCasuale.position, puntatoreCasuale.rotation);
+                colpo.transform.LookAt(player.transform);
                 GameManager.Instance.lanciaDiscoGrab = false;
                 GameManager.Instance.CambiaFaseGioco();
                 

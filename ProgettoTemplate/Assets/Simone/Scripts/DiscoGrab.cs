@@ -19,8 +19,13 @@ public class DiscoGrab : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.tag == "RestartFuocoNemico")
+            //deve riprendere il fuoco nel caso io distrugga questo disco
+        if (collision.gameObject.tag == "RestartFuocoNemico" || collision.gameObject.tag == "Sword")
         {
+            //fare scomparire temporaneamente la spada mentro lo ho in mano
+
+            //effetto quando il disco si scontra
+
             //se non afferro o manco il nemico il disco si distrugge e il nemico torna a spararmi
             GameManager.Instance.CambiaFaseGioco();
             GameManager.Instance.RiprendiFuocoNemico();

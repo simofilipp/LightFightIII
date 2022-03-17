@@ -17,7 +17,7 @@ GameObject:
   - component: {fileID: 9108789154724323331}
   m_Layer: 0
   m_Name: DiscoGrab
-  m_TagString: DiscoNemico
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

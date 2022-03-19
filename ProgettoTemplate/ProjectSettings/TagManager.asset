@@ -15,6 +15,7 @@ TagManager:
   - DiscoNemico
   - RestartFuocoNemico
   - Sword
+  - Floor
   layers:
   - Default
   - TransparentFX

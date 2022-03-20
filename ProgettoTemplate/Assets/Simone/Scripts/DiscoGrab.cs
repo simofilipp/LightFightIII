@@ -27,7 +27,7 @@ public class DiscoGrab : MonoBehaviour
             //effetto quando il disco si scontra
 
             //se non afferro o manco il nemico il disco si distrugge e il nemico torna a spararmi
-            GameManager.Instance.CambiaFaseGioco();
+            //GameManager.Instance.CambiaFaseGioco(FaseDiGioco.FaseDiDifesa);
             GameManager.Instance.RiprendiFuocoNemico();
             Destroy(this.gameObject);
         }

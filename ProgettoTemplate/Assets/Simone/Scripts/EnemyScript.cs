@@ -11,10 +11,12 @@ public class EnemyScript : MonoBehaviour
     [SerializeField] float forzaEsplosione;
     [SerializeField] float rateoDiFuoco;
 
+    public Coroutine fuocoNemico;
+
     // Start is called before the first frame update
     void Start()
     {
-        StartCoroutine(FuocoNemico());
+        
     }
 
     // Update is called once per frame
@@ -29,31 +31,40 @@ public class EnemyScript : MonoBehaviour
     {
         while (GameManager.Instance.faseCorrente==FaseDiGioco.FaseDiDifesa)
         {
-            //prendo un puntatore a caso tra i cannoni
-            var puntatoreCasuale = cannoni[Random.Range(0, cannoni.Count)].transform.GetChild(0);
-            //istanzio un disco laser e lo sparo
-            GameObject colpo;
-            if (GameManager.Instance.lanciaDiscoGrab)
+            if (!GameManager.Instance.disarmato)
             {
-                //spara il disco grabbabile e si cambia fase di gioco
-                colpo = Instantiate(discoGrab, puntatoreCasuale.position, puntatoreCasuale.rotation);
-                colpo.transform.LookAt(player.transform);
-                GameManager.Instance.lanciaDiscoGrab = false;
-                GameManager.Instance.CambiaFaseGioco();
-                
+                //prendo un puntatore a caso tra i cannoni
+                var puntatoreCasuale = cannoni[Random.Range(0, cannoni.Count)].transform.GetChild(0);
+                //istanzio un disco laser e lo sparo
+                GameObject colpo;
+                if (GameManager.Instance.lanciaDiscoGrab)
+                {
+                    //spara il disco grabbabile e si cambia fase di gioco
+                    colpo = Instantiate(discoGrab, puntatoreCasuale.position, puntatoreCasuale.rotation);
+                    colpo.transform.LookAt(player.transform);
+                    GameManager.Instance.lanciaDiscoGrab = false;
+                    GameManager.Instance.CambiaFaseGioco(FaseDiGioco.FaseAttacco);
+
+                }
+                else
+                {
+                    colpo = Instantiate(discoLaser, puntatoreCasuale.position, puntatoreCasuale.rotation);
+                    Destroy(colpo, 4f);
+                }
+                colpo.GetComponent<Rigidbody>().AddForce(puntatoreCasuale.forward * forzaEsplosione, ForceMode.VelocityChange);
             }
-            else
-            {
-                colpo = Instantiate(discoLaser, puntatoreCasuale.position, puntatoreCasuale.rotation);
-                Destroy(colpo, 4f);
-            }
-            colpo.GetComponent<Rigidbody>().AddForce(puntatoreCasuale.forward*forzaEsplosione, ForceMode.VelocityChange);
-            yield return new WaitForSeconds(rateoDiFuoco);
+                yield return new WaitForSeconds(rateoDiFuoco);
         }
     }
 
     public void RiprendiFuoco()
     {
-        StartCoroutine(FuocoNemico());
+        if (GameManager.Instance.faseCorrente == FaseDiGioco.FaseIniziale)
+            fuocoNemico = StartCoroutine(FuocoNemico());
+        else
+        {
+            StopAllCoroutines();
+            StartCoroutine(FuocoNemico());
+        }
     }
 }

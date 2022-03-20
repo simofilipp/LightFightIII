@@ -5,7 +5,8 @@ using UnityEngine;
 public enum FaseDiGioco
 {
     FaseDiDifesa,
-    FaseAttacco
+    FaseAttacco,
+    FaseIniziale
 }
 
 public class GameManager : Singleton<GameManager>
@@ -14,12 +15,15 @@ public class GameManager : Singleton<GameManager>
 
     public int dischiDistrutti = 0;
     public bool lanciaDiscoGrab;
+    public bool disarmato;
     public FaseDiGioco faseCorrente;
+
+
     [SerializeField] EnemyScript enemy;
     // Start is called before the first frame update
     void Start()
     {
-        faseCorrente = FaseDiGioco.FaseDiDifesa;    
+        faseCorrente = FaseDiGioco.FaseIniziale;    
     }
 
     // Update is called once per frame
@@ -34,21 +38,15 @@ public class GameManager : Singleton<GameManager>
         }
     }
 
-    public void CambiaFaseGioco()
+    public void CambiaFaseGioco(FaseDiGioco fdg)
     {
-        switch (faseCorrente)
-        {
-            case FaseDiGioco.FaseDiDifesa:
-                faseCorrente = FaseDiGioco.FaseAttacco;
-                break;
-            case FaseDiGioco.FaseAttacco:
-                faseCorrente = FaseDiGioco.FaseDiDifesa;
-                break;
-        }
+        faseCorrente = fdg;
     }
 
     public void RiprendiFuocoNemico()
     {
+        //Riprende a sparare il nemico 
+        faseCorrente = FaseDiGioco.FaseDiDifesa;
         enemy.RiprendiFuoco();
     }
 }

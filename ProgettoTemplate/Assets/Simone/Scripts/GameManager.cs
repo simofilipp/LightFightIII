@@ -29,7 +29,7 @@ public class GameManager : Singleton<GameManager>
     // Update is called once per frame
     void Update()
     {
-        if (dischiDistrutti >= 10)
+        if (dischiDistrutti == 10)
         {
             dischiDistrutti = 0;
             Debug.Log("Disco Grabbable");

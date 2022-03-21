@@ -8,6 +8,7 @@ public class DiscoGrab : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        //GetComponent<XRGrabInteractable>().
     }
 
     // Update is called once per frame
@@ -26,24 +27,7 @@ public class DiscoGrab : MonoBehaviour
             //effetto quando il disco si scontra
 
             //se non afferro o manco il nemico il disco si distrugge e il nemico torna a spararmi
-            GameManager.Instance.RiprendiFuocoNemico();
-            Destroy(this.gameObject);
-        }
-        if (collision.gameObject.tag == "Enemy")
-        {
-            EnemyScript nemico;
-            //se colpisco il nemico distruggo un cannone
-            if (collision.gameObject.GetComponent<EnemyScript>())
-            {
-                nemico = collision.gameObject.GetComponent<EnemyScript>();
-
-            }
-            else
-            {
-                nemico = collision.transform.parent.GetComponent<EnemyScript>();
-            }
-            
-            nemico.DistruggiCannone();
+            //GameManager.Instance.CambiaFaseGioco(FaseDiGioco.FaseDiDifesa);
             GameManager.Instance.RiprendiFuocoNemico();
             Destroy(this.gameObject);
         }

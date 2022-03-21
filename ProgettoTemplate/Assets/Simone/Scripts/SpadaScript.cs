@@ -27,6 +27,7 @@ public class SpadaScript : MonoBehaviour
     private void RiposizionaSpada()
     {
         var rbSpada = GetComponent<Rigidbody>();
+        GetComponentInChildren<VolumetricLines.VolumetricLineBehavior>().EndPos = new Vector3(0,0.001f,0);
         rbSpada.useGravity = false;
         rbSpada.velocity = Vector3.zero;
         rbSpada.angularVelocity = Vector3.zero;
@@ -37,6 +38,13 @@ public class SpadaScript : MonoBehaviour
 
     public void AttivaGravità()
     {
+        //accendere il laser e portarlo a 3.5 sulla y
+        LeanTween.value(0, 3.5f, 0.6f).setOnUpdate((float value) =>
+        {
+            GetComponentInChildren<VolumetricLines.VolumetricLineBehavior>().EndPos = new Vector3(0, value, 0);
+        });
+
+
         //viene chiamato quando prendo in mano la spada e sono pronto a difendermi
         GetComponent<Rigidbody>().useGravity = true;
         GameManager.Instance.disarmato = false;

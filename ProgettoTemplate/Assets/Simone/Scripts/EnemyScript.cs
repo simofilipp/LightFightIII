@@ -31,7 +31,7 @@ public class EnemyScript : MonoBehaviour
     {
         while (GameManager.Instance.faseCorrente==FaseDiGioco.FaseDiDifesa)
         {
-            if (!GameManager.Instance.disarmato)
+            if (!GameManager.Instance.disarmato && cannoni.Count>0)
             {
                 //prendo un puntatore a caso tra i cannoni
                 var puntatoreCasuale = cannoni[Random.Range(0, cannoni.Count)].transform.GetChild(0);
@@ -65,6 +65,17 @@ public class EnemyScript : MonoBehaviour
         {
             StopAllCoroutines();
             StartCoroutine(FuocoNemico());
+        }
+    }
+
+    public void DistruggiCannone()
+    {
+        //rimuovo il primo cannone dalla lista e lo distruggo in scena
+        if (cannoni.Count > 0)
+        {
+            var cannoneDistrutto = cannoni[Random.Range(0, cannoni.Count)];
+            cannoni.Remove(cannoneDistrutto);
+            Destroy(cannoneDistrutto);
         }
     }
 }

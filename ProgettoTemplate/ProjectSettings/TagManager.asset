@@ -16,6 +16,7 @@ TagManager:
   - RestartFuocoNemico
   - Sword
   - Floor
+  - Enemy
   layers:
   - Default
   - TransparentFX
